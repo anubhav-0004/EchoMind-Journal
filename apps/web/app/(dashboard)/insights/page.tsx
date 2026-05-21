@@ -105,9 +105,9 @@ export default function InsightsPage() {
     borderRadius: "10px",
     display: "flex",
     flexDirection: "column" as const,
-    alignItems: "center",
+    alignItems: "center" as const,
     minHeight: "200px",
-    justifyContent: "center",
+    justifyContent: "center" as const,
     padding: "16px 20px",
     fontWeight: "500",
   };
