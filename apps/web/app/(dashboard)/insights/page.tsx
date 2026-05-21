@@ -104,7 +104,7 @@ export default function InsightsPage() {
     border: "2px solid rgba(44,58,68,0.28)",
     borderRadius: "10px",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column" as const,
     alignItems: "center",
     minHeight: "200px",
     justifyContent: "center",
