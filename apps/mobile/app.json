@@ -18,10 +18,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0f1e1a"
-      }
+      },
+      "package": "com.anubhav004.echomind"
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "940c987b-a56c-4c72-85c1-ce8afa2a023a"
+      }
+    }
   }
 }

@@ -8,7 +8,7 @@ export async function connectSocket(): Promise<Socket> {
 
   const token = await getToken()
 
-  socket = io('http://192.168.31.4:4000', {
+  socket = io('https://echomind-server.onrender.com', {
     // ↑ Same IP as apollo.ts
     auth: { token: `Bearer ${token}` },
     autoConnect: true,

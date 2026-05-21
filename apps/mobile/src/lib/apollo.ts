@@ -6,7 +6,7 @@ const httpLink = createHttpLink({
   // Replace with your deployed server URL when deploying
   // For local dev use your machine's IP, not localhost
   // (mobile device/emulator can't reach localhost)
-  uri: 'http://192.168.31.4:4000/graphql',
+  uri: 'https://echomind-server.onrender.com/graphql',
   // ↑ Run `ipconfig` in terminal, use your IPv4 address
 })
 

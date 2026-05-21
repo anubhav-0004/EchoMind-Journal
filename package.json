@@ -2,9 +2,13 @@
   "name": "echomind",
   "private": true,
   "packageManager": "npm@11.5.2",
+   "engines": {
+    "node": "20.x"
+  },
   "workspaces": [
     "apps/web",
     "apps/server",
+    "apps/mobile",
     "packages/*"
   ],
   "scripts": {
