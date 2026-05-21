@@ -1,0 +1,121 @@
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+
+  email        String   @unique
+
+  passwordHash String
+
+  displayName  String
+  avatarUrl    String?
+
+  role         Role     @default(USER)
+
+  fcmToken     String?
+
+  notifyDaily  Boolean  @default(true)
+  notifyWeekly Boolean  @default(true)
+  timezone     String   @default("Asia/Kolkata")
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  entries      Entry[]
+  weeklyReports WeeklyReport[]
+
+  @@index([email])
+
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Entry {
+  id          String      @id @default(cuid())
+  userId      String
+
+  title       String
+  body        String      @db.Text
+
+  wordCount   Int
+  status      EntryStatus @default(DRAFT)
+  tags        String[]
+
+  writtenAt   DateTime    @default(now())
+  publishedAt DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  moodAnalysis MoodAnalysis?
+
+  @@index([userId])
+  @@index([userId, writtenAt])
+}
+
+enum EntryStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model MoodAnalysis {
+  id                String   @id @default(cuid())
+  entryId           String   @unique
+
+  moodScore         Float
+
+  sentimentPolarity String
+
+  sentimentScore    Float
+
+  primaryMood       String
+
+  emotionBreakdown  Json
+
+  stressLevel       Float
+  keywords          String[]
+
+  aiSummary         String   @db.Text
+
+  processedAt       DateTime @default(now())
+
+  entry             Entry    @relation(fields: [entryId], references: [id], onDelete: Cascade)
+
+  @@index([entryId])
+}
+
+model WeeklyReport {
+  id             String   @id @default(cuid())
+  userId         String
+  weekStartDate  DateTime
+
+  weekEndDate    DateTime
+
+  avgMoodScore   Float
+  avgStressLevel Float
+  dominantMoods  String[]
+  topThemes      String[]
+  emotionArc     Json
+
+  aiSummary      String   @db.Text
+  pdfUrl         String?
+  generatedAt    DateTime @default(now())
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, weekStartDate])
+  @@index([userId])
+  @@index([weekStartDate])
+}

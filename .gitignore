@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment files
+.env
+.env.*
+*.env
+*.env.local
+*.env.development
+*.env.test
+*.env.production
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# React Native
+android/
+ios/
+
+# Next.js
+.next/
+out/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# TypeScript
+*.tsbuildinfo
+
+# Turbo
+.turbo/
+
+# Build
+build/
+coverage/
+
+# Prisma
+prisma/dev.db
+
+# Android
+*.keystore
+
+# Mac
+.AppleDouble
+.LSOverride

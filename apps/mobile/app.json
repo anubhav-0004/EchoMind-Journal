@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "EchoMind",
+    "slug": "echomind",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#0f1e1a",
+      "resizeMode": "contain",
+      "image": "./assets/icon.png"
+    },
+    "ios": {
+      "supportsTablet": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f1e1a"
+      }
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
+  }
+}

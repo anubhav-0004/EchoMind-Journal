@@ -1,0 +1,1 @@
+{"query":"mutation { signup(email: \"test@test.com\", password: \"pass123\", displayName: \"Anubhav\") { token user { id displayName } } }"}
