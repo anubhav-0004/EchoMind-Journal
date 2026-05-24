@@ -26,6 +26,7 @@ export default function SignupPage() {
     displayName: "",
   });
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const [signup, { loading }] = useMutation(SIGNUP_MUTATION, {
     onCompleted: (data) => {
@@ -128,7 +129,7 @@ export default function SignupPage() {
               key: "displayName",
               label: "Your name",
               type: "text",
-              placeholder: "Anubhav Kumar",
+              placeholder: "Anubhav Mishra",
             },
             {
               key: "email",
@@ -156,16 +157,55 @@ export default function SignupPage() {
               >
                 {field.label}
               </label>
-              <input
-                type={field.type}
-                value={(form as any)[field.key]}
-                onChange={(e) =>
-                  setForm((prev) => ({ ...prev, [field.key]: e.target.value }))
-                }
-                required
-                style={inputStyle}
-                placeholder={field.placeholder}
-              />
+              <div
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <input
+                  type={
+                    field.key === "password"
+                      ? showPassword
+                        ? "text"
+                        : "password"
+                      : field.type
+                  }
+                  value={(form as any)[field.key]}
+                  onChange={(e) =>
+                    setForm((prev) => ({
+                      ...prev,
+                      [field.key]: e.target.value,
+                    }))
+                  }
+                  required
+                  style={{
+                    ...inputStyle,
+                    paddingRight: field.key === "password" ? "70px" : "12px",
+                  }}
+                  placeholder={field.placeholder}
+                />
+
+                {field.key === "password" && (
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    style={{
+                      position: "absolute",
+                      right: "12px",
+                      background: "transparent",
+                      border: "none",
+                      color: "#4a7c6f",
+                      cursor: "pointer",
+                      fontSize: "13px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                )}
+              </div>
             </div>
           ))}
 

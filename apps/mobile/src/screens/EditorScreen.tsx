@@ -165,17 +165,15 @@ export function EditorScreen() {
       </SafeAreaView>
 
       <ScrollView style={styles.scroll} keyboardShouldPersistTaps="handled">
-        {/* Title input */}
         <TextInput
           style={styles.titleInput}
           value={title}
           onChangeText={setTitle}
-          placeholder="What's on your mind?"
+          placeholder="Title your thoughts..."
           placeholderTextColor={colors.textMuted}
           multiline
         />
 
-        {/* Body input */}
         <TextInput
           style={styles.bodyInput}
           value={body}
@@ -186,10 +184,8 @@ export function EditorScreen() {
           textAlignVertical="top"
         />
 
-        {/* Word count */}
         <Text style={styles.wordCount}>{wordCount} words</Text>
 
-        {/* Tags */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -219,7 +215,6 @@ export function EditorScreen() {
           ))}
         </ScrollView>
 
-        {/* Live insights */}
         {showInsights && insight && (
           <View style={styles.insightSection}>
             <Text style={styles.insightHeader}>✦ Live Insights</Text>

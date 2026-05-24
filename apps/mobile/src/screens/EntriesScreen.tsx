@@ -7,7 +7,7 @@ import { colors, spacing, radius, fontSize } from '../lib/theme'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const GET_ENTRIES = gql`
-  query {
+  query Entries {
     entries(limit: 50) {
       id title wordCount tags writtenAt
       moodAnalysis { moodScore primaryMood }

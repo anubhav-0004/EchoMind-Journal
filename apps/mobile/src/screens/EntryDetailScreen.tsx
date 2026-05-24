@@ -1,4 +1,4 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import { colors, spacing, radius, fontSize } from "../lib/theme";
 import { Card } from "../components/Card";
@@ -34,6 +35,12 @@ const GET_ENTRY = gql`
   }
 `;
 
+const DELETE_ENTRY = gql`
+  mutation DeleteEntry($id: ID!) {
+    deleteEntry(id: $id)
+  }
+`;
+
 const MOOD_COLORS: Record<string, string> = {
   calm: "#4a7c6f",
   joyful: "#d4872a",
@@ -55,6 +62,37 @@ export function EntryDetailScreen({ route, navigation }: any) {
   const { id } = route.params;
 
   const { data, loading } = useQuery(GET_ENTRY, { variables: { id } });
+
+  const [deleteEntry, { loading: deleting }] = useMutation(DELETE_ENTRY, {
+    refetchQueries: ["Entries"],
+    awaitRefetchQueries: true,
+
+    onCompleted: () => {
+      navigation.goBack();
+    },
+
+    onError: (err) => {
+      Alert.alert("Delete failed", err.message);
+    },
+  });
+
+  const handleDelete = () => {
+    Alert.alert("Delete Entry", "Are you sure you want to delete this entry?", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: async () => {
+          await deleteEntry({
+            variables: { id },
+          });
+        },
+      },
+    ]);
+  };
 
   if (loading)
     return (
@@ -83,6 +121,13 @@ export function EntryDetailScreen({ route, navigation }: any) {
           style={styles.backBtn}
         >
           <Text style={styles.backText}>← Back</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleDelete}
+          style={styles.deleteBtn}
+          disabled={deleting}
+        >
+          <Text style={styles.deleteText}>{deleting ? "..." : "Delete"}</Text>
         </TouchableOpacity>
         <View style={[styles.moodBadge, { backgroundColor: `${moodColor}20` }]}>
           <Text style={[styles.moodBadgeText, { color: moodColor }]}>
@@ -205,12 +250,35 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
     backgroundColor: colors.bgCard,
   },
-  backBtn: { paddingHorizontal: 12, paddingVertical: 4, borderColor: 'rgba(255,255,255,0.27)', borderRadius: radius.sm, borderWidth: 1 },
+  backBtn: {
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderColor: "rgba(255,255,255,0.27)",
+    borderRadius: radius.sm,
+    borderWidth: 1,
+  },
+  deleteBtn: {
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    marginLeft: 'auto',
+    marginRight: spacing.md,
+    borderColor: "rgba(255,80,80,0.35)",
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    backgroundColor: "rgba(255,80,80,0.08)",
+  },
   backText: { color: colors.sageLight, fontSize: fontSize.md },
+  deleteText: {
+    color: "#ff6b6b",
+    fontSize: fontSize.sm,
+    fontWeight: "500",
+  },
   moodBadge: {
     paddingHorizontal: 14,
     paddingVertical: 4,
     borderRadius: radius.full,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.3)",
   },
   moodBadgeText: {
     fontSize: fontSize.sm,

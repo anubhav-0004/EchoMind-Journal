@@ -1,83 +1,278 @@
 # EchoMind — Backend Server
 
-Node.js + TypeScript backend powering the EchoMind journaling platform.
+Backend infrastructure for the EchoMind AI-powered journaling ecosystem, built with Node.js, TypeScript, GraphQL, PostgreSQL, and realtime AI processing.
 
-## Stack
-- **Runtime:** Node.js 18+ with TypeScript
-- **API:** GraphQL via Apollo Server 4
-- **Database:** PostgreSQL with Prisma ORM v7
-- **Real-time:** Socket.io (live AI insights)
-- **AI:** Groq API (LLaMA 3.1 8B)
-- **Auth:** JWT + bcrypt
-- **Jobs:** node-cron (Sunday weekly reports)
-- **PDF:** Puppeteer
+The server powers:
+- authentication
+- journal management
+- realtime emotional insights
+- AI-generated reflections
+- weekly report automation
+- websocket communication
+- admin analytics
 
-## Structure
+Designed using scalable backend engineering practices with a modular service-oriented architecture.
 
+---
+
+## Live API
+
+- Health Endpoint: https://echomind-server.onrender.com/health
+- GraphQL Endpoint: `POST /graphql`
+
+---
+
+## Core Features
+
+- GraphQL API with Apollo Server
+- JWT authentication & authorization
+- Realtime AI insights using Socket.IO
+- AI-powered emotional analysis
+- Weekly report automation with cron jobs
+- PostgreSQL database with Prisma ORM
+- PDF report generation
+- Role-based admin system
+- Modular service architecture
+
+---
+
+## Tech Stack
+
+### Backend Core
+- Node.js
+- TypeScript
+- Express.js
+- Apollo Server
+- GraphQL
+
+### Database & ORM
+- PostgreSQL
+- Prisma ORM v7
+
+### AI & Realtime
+- Groq API (LLaMA 3.1)
+- Socket.IO
+
+### Security & Auth
+- JWT
+- bcrypt
+
+### Automation & Utilities
+- node-cron
+- Puppeteer
+
+---
+
+## Project Structure
+
+```text
 src/
 ├── graphql/
 │   ├── schema/
-│   │   └── typeDefs.ts        # GraphQL schema
 │   ├── resolvers/
-│   │   ├── auth.resolver.ts   # signup, login
-│   │   └── entry.resolver.ts  # CRUD + AI mutations
-│   └── context.ts             # JWT auth context
+│   └── context.ts
+│
 ├── services/
-│   ├── grok.service.ts        # All Groq AI calls
-│   ├── pdf.service.ts         # PDF generation
-│   ├── fcm.service.ts         # Push notifications
+│   ├── grok.service.ts
+│   ├── pdf.service.ts
+│   ├── fcm.service.ts
 │   └── jobs/
-│       └── weeklyReport.job.ts # Sunday cron
+│
 ├── socket/
-│   ├── socket.server.ts       # Socket.io setup
-│   └── insight.handler.ts     # Live insight debouncer
+│   ├── socket.server.ts
+│   └── insight.handler.ts
+│
 ├── prisma/
-│   └── client.ts              # Prisma singleton
+│   └── client.ts
+│
 ├── lib/
-│   └── auth.ts                # JWT + bcrypt helpers
-└── index.ts                   # Server entry point
+│   └── auth.ts
+│
+└── index.ts
+```
 
+---
 
-## API
-
-### GraphQL Endpoint
-`POST /graphql`
+## GraphQL API
 
 ### Key Queries
+
 ```graphql
-me          # Current user
-entries     # User's journal entries
-weeklyReports # Generated weekly reports
-adminStats  # Platform analytics (ADMIN only)
+me
+entries
+weeklyReports
+adminStats
 ```
 
 ### Key Mutations
+
 ```graphql
-signup / login           # Authentication
-createEntry / publishEntry # Journal entry lifecycle
-chatWithDiary            # LLM-powered diary chat
-generateWeeklyReport     # Manual report generation
+signup
+login
+
+createEntry
+publishEntry
+deleteEntry
+
+chatWithDiary
+
+generateWeeklyReport
 ```
 
-### Socket Events
-| Event | Direction | Description |
-|-------|-----------|-------------|
-| `entry:typing` | Client → Server | Text update (debounced 2500ms) |
-| `entry:insight` | Server → Client | Live AI analysis result |
+---
 
-## Development
+## Realtime Events
+
+| Event | Direction | Purpose |
+|---|---|---|
+| `entry:typing` | Client → Server | Debounced journal updates |
+| `entry:insight` | Server → Client | Live AI emotional analysis |
+
+---
+
+## Local Development
+
+### Install Dependencies
+
 ```bash
-npm run dev          # Start with hot reload (tsx watch)
-npm run db:migrate   # Run Prisma migrations
-npm run db:studio    # Open Prisma Studio
-npm run db:generate  # Regenerate Prisma client
+npm install
 ```
+
+### Start Development Server
+
+```bash
+npm run dev
+```
+
+Runs with:
+- hot reload
+- tsx watch mode
+- TypeScript runtime execution
+
+---
+
+## Prisma Commands
+
+### Run Database Migration
+
+```bash
+npm run db:migrate
+```
+
+### Generate Prisma Client
+
+```bash
+npm run db:generate
+```
+
+### Open Prisma Studio
+
+```bash
+npm run db:studio
+```
+
+---
 
 ## Environment Variables
-```env
-DATABASE_URL=       # PostgreSQL connection string
-JWT_SECRET=         # Min 32 char random string
-GROQ_API_KEY=       # From console.groq.com
-PORT=4000
-WEB_URL=            # Frontend URL for CORS
+
+Create:
+
+```text
+.env
 ```
+
+```env
+DATABASE_URL=
+JWT_SECRET=
+GROQ_API_KEY=
+PORT=4000
+WEB_URL=
+```
+
+---
+
+## Architecture Highlights
+
+### GraphQL-First API Design
+EchoMind uses GraphQL to provide:
+- flexible client-driven data fetching
+- strongly typed schemas
+- scalable frontend integration
+- reduced overfetching
+
+### Realtime AI Processing
+Socket.IO powers:
+- live typing analysis
+- emotional feedback streaming
+- low-latency insight updates
+
+### Service-Oriented Structure
+Business logic is separated into:
+- AI services
+- PDF services
+- auth utilities
+- websocket handlers
+- scheduled jobs
+
+This improves:
+- maintainability
+- scalability
+- testing capability
+
+### Prisma ORM
+Prisma provides:
+- type-safe database access
+- schema-driven modeling
+- migration workflows
+- excellent TypeScript integration
+
+---
+
+## Security Features
+
+- JWT authentication
+- bcrypt password hashing
+- protected GraphQL resolvers
+- role-based admin authorization
+- secure environment configuration
+- CORS protection
+
+---
+
+## Automation System
+
+Weekly emotional reports are generated automatically every Sunday using `node-cron`.
+
+The pipeline:
+1. fetches user entries
+2. aggregates emotional trends
+3. generates AI reflections
+4. stores report data
+5. enables PDF export
+
+---
+
+## Future Improvements
+
+- Redis caching
+- Docker containerization
+- CI/CD pipelines
+- Queue workers
+- Webhook integrations
+- Push notification delivery
+- OpenTelemetry monitoring
+- Background AI processing
+- Automated testing infrastructure
+
+---
+
+## Author
+
+### Anubhav Mishra
+
+- GitHub: https://github.com/anubhav-0004
+- LinkedIn: https://www.linkedin.com/in/anubhav-04-mishra/
+
+---
+
+Part of the EchoMind full-stack AI ecosystem.

@@ -28,6 +28,7 @@ const SIGNUP = gql`
 `;
 
 export function SignupScreen({ navigation }: any) {
+  const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
     displayName: "",
     email: "",
@@ -54,7 +55,7 @@ export function SignupScreen({ navigation }: any) {
     {
       key: "displayName",
       label: "Your name",
-      placeholder: "Anubhav Kumar",
+      placeholder: "Anubhav Mishra",
       type: "default",
     },
     {
@@ -95,19 +96,34 @@ export function SignupScreen({ navigation }: any) {
           {fields.map((field) => (
             <View key={field.key} style={styles.field}>
               <Text style={styles.label}>{field.label}</Text>
-              <TextInput
-                style={styles.input}
-                value={(form as any)[field.key]}
-                onChangeText={(val) =>
-                  setForm((prev) => ({ ...prev, [field.key]: val }))
-                }
-                placeholder={field.placeholder}
-                placeholderTextColor={colors.textMuted}
-                keyboardType={field.type as any}
-                autoCapitalize={field.key === "email" ? "none" : "words"}
-                secureTextEntry={field.secure}
-                autoCorrect={false}
-              />
+              <View style={styles.passwordWrapper}>
+                <TextInput
+                  key={showPassword ? "visible" : "hidden"}
+                  style={[styles.input, { flex: 1, borderWidth: 0 }]}
+                  value={(form as any)[field.key]}
+                  onChangeText={(val) =>
+                    setForm((prev) => ({ ...prev, [field.key]: val }))
+                  }
+                  placeholder={field.placeholder}
+                  placeholderTextColor={colors.textMuted}
+                  keyboardType={field.type as any}
+                  autoCapitalize={field.key === "email" ? "none" : "words"}
+                  secureTextEntry={
+                    field.key === "password" ? !showPassword : false
+                  }
+                  autoCorrect={false}
+                />
+
+                {field.secure && (
+                  <TouchableOpacity
+                    onPress={() => setShowPassword((prev) => !prev)}
+                  >
+                    <Text style={styles.toggleText}>
+                      {showPassword ? "Hide" : "Show"}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
             </View>
           ))}
 
@@ -166,6 +182,25 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
     borderWidth: 1,
     borderColor: colors.border,
+  },
+  passwordWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.bgInput,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    borderColor: colors.border,
+    paddingRight: spacing.md,
+  },
+
+  toggleText: {
+    color: colors.sageLight,
+    fontSize: fontSize.sm,
+    fontWeight: "500",
+    backgroundColor: "rgba(156, 163, 175, 0.2)",
+    paddingHorizontal: 8,
+    paddingVertical: 5,
+    borderRadius: radius.md,
   },
   formTitle: {
     fontSize: fontSize.xl,

@@ -211,7 +211,7 @@ export default function EditorPage() {
             </p>
           </div>
           <div style={{ display: "flex", gap: "8px" }}>
-            <button
+            {/* <button
               onClick={handleSaveDraft}
               style={{
                 padding: "7px 14px",
@@ -224,7 +224,7 @@ export default function EditorPage() {
               }}
             >
               {saved ? "✓ Saved" : "Save Draft"}
-            </button>
+            </button> */}
             <button
               onClick={handlePublish}
               disabled={publishing || published}
@@ -263,7 +263,7 @@ export default function EditorPage() {
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="What's on your mind today?"
+            placeholder="Title your thoughts..."
             style={{
               width: "100%",
               fontSize: "26px",

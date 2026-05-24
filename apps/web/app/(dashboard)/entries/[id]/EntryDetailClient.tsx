@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import { useRouter, useParams } from "next/navigation";
 
 const GET_ENTRY = gql`
@@ -28,6 +28,12 @@ const GET_ENTRY = gql`
   }
 `;
 
+const DELETE_ENTRY = gql`
+  mutation DeleteEntry($id: ID!) {
+    deleteEntry(id: $id)
+  }
+`;
+
 const MOOD_COLORS: Record<string, string> = {
   calm: "#1e6b57",
   joyful: "#e88b1a",
@@ -48,6 +54,20 @@ export default function EntryDetailClient() {
   const { data, loading, error } = useQuery(GET_ENTRY, {
     variables: { id },
     skip: !id,
+  });
+
+  const [deleteEntry, { loading: deleting }] = useMutation(DELETE_ENTRY, {
+    refetchQueries: ["Entries"],
+    awaitRefetchQueries: true,
+
+    onCompleted: () => {
+      router.push("/entries");
+      router.refresh();
+    },
+
+    onError: (err) => {
+      alert(err.message);
+    },
   });
 
   if (loading)
@@ -144,7 +164,36 @@ export default function EntryDetailClient() {
         >
           ← Back
         </button>
-        <div style={{ fontSize: "14px", color: "#2a4b69", fontWeight: "500" }}>{writtenDate}</div>
+        <div style={{ fontSize: "14px", color: "#2a4b69", fontWeight: "500" }}>
+          {writtenDate}
+        </div>
+        <button
+          onClick={async () => {
+            const confirmDelete = window.confirm(
+              "Are you sure you want to delete this entry?",
+            );
+
+            if (!confirmDelete) return;
+
+            await deleteEntry({
+              variables: { id },
+            });
+          }}
+          disabled={deleting}
+          style={{
+            padding: "8px 18px",
+            borderRadius: "8px",
+            border: "1px solid rgba(240,74,55,0.18)",
+            background: "rgba(240,74,55,0.08)",
+            color: "#f04a37",
+            fontSize: "12px",
+            cursor: "pointer",
+            marginRight: "16px",
+            marginLeft: "auto",
+          }}
+        >
+          {deleting ? "Deleting..." : "Delete"}
+        </button>
         <div
           style={{
             padding: "6px 16px",
@@ -165,7 +214,7 @@ export default function EntryDetailClient() {
           flex: 1,
           overflow: "auto",
           display: "grid",
-          gridTemplateColumns: "1fr 300px",
+          gridTemplateColumns: "1fr 450px",
         }}
       >
         <div

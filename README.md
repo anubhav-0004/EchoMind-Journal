@@ -1,320 +1,101 @@
-````markdown
-# ✦ EchoMind — AI-Powered Journaling & Emotional Intelligence Platform
+# EchoMind — AI-Powered Journaling Platform
 
-<div align="center">
+EchoMind is a full-stack AI journaling platform that analyzes emotions in real-time, generates intelligent weekly reports, and allows users to interact with their journal history using conversational AI.
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
-![React Native](https://img.shields.io/badge/React_Native-Expo-blue?style=for-the-badge&logo=react)
-![GraphQL](https://img.shields.io/badge/GraphQL-Apollo-E10098?style=for-the-badge&logo=graphql)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql)
-![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma)
-![Socket.IO](https://img.shields.io/badge/Socket.IO-Realtime-black?style=for-the-badge&logo=socketdotio)
-![Expo](https://img.shields.io/badge/Expo-Mobile-black?style=for-the-badge&logo=expo)
-![AI Powered](https://img.shields.io/badge/AI-Powered-success?style=for-the-badge)
-![Monorepo](https://img.shields.io/badge/Architecture-Monorepo-orange?style=for-the-badge)
-
-### A production-grade AI journaling ecosystem built with modern full-stack engineering principles.
-
-EchoMind is a full-stack AI-powered journaling platform that analyzes emotional patterns in real-time, generates intelligent weekly mental health summaries, and enables conversational interaction with historical journal data using LLM-powered insights.
-
-Designed as a modern engineering-focused portfolio project, EchoMind demonstrates production-oriented architecture across:
-- scalable GraphQL APIs
-- real-time systems
-- AI integration pipelines
-- monorepo architecture
-- cross-platform mobile engineering
-- type-safe backend systems
-- modern frontend rendering patterns
+Built as a production-focused engineering project, EchoMind demonstrates modern full-stack architecture using GraphQL, TypeScript, PostgreSQL, Next.js, React Native, and realtime systems.
 
 ---
 
-## 🌐 Live Applications
+## Live Demo
 
-### 🖥️ Web App
-https://echomind-journal.vercel.app/
-
-### ⚙️ Backend Health Endpoint
-https://echomind-server.onrender.com/health
-
-### 📦 Monorepo Repository
-https://github.com/anubhav-0004/EchoMind-Journal
-
-### 👨‍💻 LinkedIn
-https://www.linkedin.com/in/anubhav-04-mishra/
-
-</div>
+- Web App: https://echomind-journal.vercel.app/
+- Backend Health: https://echomind-server.onrender.com/health
+- Repository: https://github.com/anubhav-0004/EchoMind-Journal
 
 ---
 
-# ✨ Core Features
+## Features
 
-## 🧠 Real-Time AI Emotional Analysis
-
-EchoMind continuously analyzes emotional signals while the user writes.
-
-The system uses:
-- debounced AI requests
-- realtime websocket updates
-- mood scoring
-- emotional trend extraction
-- sentiment mapping
-
-As users type, the backend processes emotional indicators and streams live insights back to the UI through Socket.IO.
-
-### Features
-- live mood analysis
-- stress signal detection
-- emotional scoring
-- realtime websocket communication
-- optimized debounce architecture (2500ms)
+- Real-time AI mood analysis while typing
+- AI-generated emotional summaries
+- Weekly mental health reports
+- Interactive insights dashboard
+- Chat with your diary using AI
+- PDF report generation
+- Realtime updates with Socket.IO
+- Cross-platform mobile app with Expo
+- JWT-based authentication
+- Admin dashboard & role management
 
 ---
 
-## 📖 AI-Powered Journal Intelligence
+## Tech Stack
 
-After publishing an entry, EchoMind performs a deeper reflective analysis using LLM-based processing.
+### Frontend
+- Next.js
+- React Native + Expo
+- Apollo Client
+- TypeScript
 
-Generated insights include:
-- emotional summaries
-- recurring themes
-- sentiment breakdowns
-- keyword extraction
-- reflective observations
+### Backend
+- Node.js
+- Express
+- GraphQL + Apollo Server
+- Socket.IO
+- Prisma ORM
 
----
+### Database & AI
+- PostgreSQL
+- Groq API (LLaMA 3.1)
 
-## 📊 Weekly Mental Map Reports
-
-A scheduled backend automation pipeline generates AI-powered weekly emotional summaries every Sunday using cron jobs.
-
-Reports include:
-- emotional progression
-- dominant moods
-- weekly trends
-- recurring emotional triggers
-- reflective summaries
-- behavioral insights
-
----
-
-## 💬 Chat With Your Diary
-
-EchoMind enables conversational interaction with historical journal entries.
-
-Users can:
-- ask reflective questions
-- revisit emotional patterns
-- summarize previous weeks
-- query past thoughts contextually
-
-The conversational layer is grounded in actual user-generated journal data.
+### DevOps & Deployment
+- Turborepo Monorepo
+- Vercel
+- Render
 
 ---
 
-## 📈 Insights Dashboard
-
-Interactive analytics dashboard featuring:
-- emotional trend charts
-- mood distribution graphs
-- activity heatmaps
-- keyword frequency analysis
-- behavioral pattern visualization
-
----
-
-## 📄 PDF Weekly Report Generation
-
-Weekly reports can be exported as professionally formatted PDFs generated server-side using Puppeteer.
-
-Features:
-- HTML-to-PDF rendering
-- consistent styling
-- downloadable reports
-- server-generated export pipeline
-
----
-
-## 📱 Cross-Platform Mobile Application
-
-EchoMind includes a React Native + Expo mobile application with:
-- realtime synchronization
-- GraphQL integration
-- authentication flows
-- responsive mobile layouts
-- APK distribution support
-
-Android APK builds are available and functional.
-
----
-
-## 🔐 Authentication & Authorization
-
-Secure JWT-based authentication architecture with:
-- password hashing using bcrypt
-- token-based authentication
-- role-based admin access
-- protected GraphQL resolvers
-- secure environment variable handling
-
----
-
-# 🏗️ System Architecture
+## Architecture Overview
 
 ```text
-                           ┌────────────────────┐
-                           │   React Native     │
-                           │   Expo Mobile App  │
-                           └─────────┬──────────┘
-                                     │
-                              GraphQL + Socket.IO
-                                     │
-                                     ▼
-┌────────────────────┐      ┌──────────────────────┐
-│   Next.js Web App  │─────►│ Node.js GraphQL API │
-│     (Vercel)       │      │  Apollo + Express   │
-└────────────────────┘      └─────────┬────────────┘
-                                      │
-                     ┌────────────────┼────────────────┐
-                     │                │                │
-                     ▼                ▼                ▼
-              ┌────────────┐   ┌────────────┐   ┌────────────┐
-              │ PostgreSQL │   │ Socket.IO  │   │ Cron Jobs  │
-              │ + Prisma   │   │ Realtime   │   │ Automation │
-              └────────────┘   └────────────┘   └────────────┘
-                     │
-                     ▼
-              ┌────────────┐
-              │   Groq AI  │
-              │ LLaMA 3.1  │
-              └────────────┘
-````
+Next.js Web App
+        │
+        │ GraphQL + Socket.IO
+        ▼
+Node.js + Apollo Server
+        │
+        ├── PostgreSQL + Prisma
+        ├── Groq AI API
+        └── Cron Jobs
 
----
-
-# 🧠 Engineering Highlights
-
-## Why GraphQL Instead of REST?
-
-EchoMind uses GraphQL with Apollo Server to enable:
-
-* client-driven queries
-* reduced overfetching
-* strongly typed APIs
-* scalable frontend-backend contracts
-* improved developer experience
-* centralized API architecture
-
-This architecture becomes especially valuable in applications with:
-
-* realtime data
-* multiple frontend clients
-* nested relational data
-* analytics dashboards
-* mobile + web synchronization
-
----
-
-## Why Monorepo Architecture?
-
-The project follows a Turborepo-based monorepo structure to improve:
-
-* shared type safety
-* code reuse
-* developer productivity
-* consistent architecture
-* scalable workspace management
-
-Shared packages include:
-
-* reusable utilities
-* shared TypeScript types
-
----
-
-## Real-Time Engineering Design
-
-Realtime emotional analysis is powered using:
-
-* Socket.IO
-* websocket-based communication
-* debounced AI requests
-* event-driven updates
-
-This enables low-latency emotional feedback without excessive API traffic.
-
----
-
-## Full-Stack Type Safety
-
-TypeScript is used across:
-
-* frontend
-* backend
-* shared packages
-
-This improves:
-
-* maintainability
-* refactor safety
-* developer experience
-* API reliability
-* long-term scalability
-
----
-
-# 🛠️ Tech Stack
-
-| Layer          | Technology                     |
-| -------------- | ------------------------------ |
-| Web Frontend   | Next.js 16 + React             |
-| Mobile         | React Native + Expo            |
-| Backend        | Node.js + Express + TypeScript |
-| API Layer      | GraphQL + Apollo Server        |
-| Database       | PostgreSQL                     |
-| ORM            | Prisma                         |
-| Authentication | JWT + bcrypt                   |
-| Realtime       | Socket.IO                      |
-| AI Integration | Groq API (LLaMA 3.1)           |
-| Scheduling     | node-cron                      |
-| PDF Generation | Puppeteer                      |
-| Deployment     | Vercel + Render                |
-| Architecture   | Turborepo Monorepo             |
-
----
-
-# 📁 Monorepo Structure
-
-```text
-echomind/
-│
-├── apps/
-│   ├── server/      → Node.js + GraphQL backend
-│   ├── web/         → Next.js web application
-│   └── mobile/      → React Native Expo app
-│
-├── packages/
-│   ├── types/       → Shared TypeScript contracts
-│   └── utils/       → Shared utilities
-│
-├── turbo.json
-└── package.json
+React Native App
+        │
+        └── Shared Backend
 ```
 
 ---
 
-# 🚀 Local Development Setup
+## Monorepo Structure
 
-## Prerequisites
-
-* Node.js 20+
-* PostgreSQL
-* npm
-* Groq API key
+```text
+echomind/
+├── apps/
+│   ├── server/
+│   ├── web/
+│   └── mobile/
+│
+├── packages/
+│   ├── types/
+│   └── utils/
+│
+└── turbo.json
+```
 
 ---
 
-## Clone Repository
+## Local Setup
+
+### Clone Repository
 
 ```bash
 git clone https://github.com/anubhav-0004/EchoMind-Journal.git
@@ -322,19 +103,19 @@ git clone https://github.com/anubhav-0004/EchoMind-Journal.git
 cd EchoMind-Journal
 ```
 
----
-
-## Install Dependencies
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
----
+### Backend Environment Variables
 
-## Backend Environment Variables
+Create:
 
-### `apps/server/.env`
+```text
+apps/server/.env
+```
 
 ```env
 DATABASE_URL=
@@ -344,22 +125,26 @@ WEB_URL=
 PORT=4000
 ```
 
----
+### Web Environment Variables
 
-## Web Environment Variables
+Create:
 
-### `apps/web/.env.local`
+```text
+apps/web/.env.local
+```
 
 ```env
 NEXT_PUBLIC_API_URL=
 NEXT_PUBLIC_SERVER_URL=
 ```
 
----
+### Mobile Environment Variables
 
-## Mobile Environment Variables
+Create:
 
-### `apps/mobile/.env`
+```text
+apps/mobile/.env
+```
 
 ```env
 EXPO_PUBLIC_API_URL=
@@ -368,19 +153,7 @@ EXPO_PUBLIC_SOCKET_URL=
 
 ---
 
-## Database Setup
-
-```bash
-cd apps/server
-
-npx prisma generate
-
-npx prisma migrate dev
-```
-
----
-
-## Start Development Servers
+## Run Development Servers
 
 ### Backend
 
@@ -405,151 +178,37 @@ npx expo start
 
 ---
 
-# 🔐 Security Practices
+## Engineering Highlights
 
-EchoMind follows several production-oriented security practices:
-
-* bcrypt password hashing
-* JWT authentication
-* protected GraphQL resolvers
-* environment variable isolation
-* role-based authorization
-* scoped database access
-* CORS configuration
-* secure API separation
+- GraphQL architecture for flexible client-driven APIs
+- Realtime websocket-based emotional insights
+- Shared TypeScript types across frontend and backend
+- Monorepo architecture with Turborepo
+- Automated weekly report generation using cron jobs
+- Cross-platform mobile support with Expo
 
 ---
 
-# ⚡ Performance Optimizations
+## Future Improvements
 
-Implemented optimizations include:
-
-* debounced realtime AI analysis
-* websocket-based updates
-* Apollo GraphQL caching
-* optimized Prisma queries
-* modular monorepo architecture
-* reusable shared packages
-* efficient rendering patterns
-* type-safe backend contracts
+- Docker support
+- CI/CD pipelines
+- Automated testing
+- Push notifications
+- Redis caching
+- Offline mobile sync
+- AI memory system
+- Advanced observability & monitoring
 
 ---
 
-# 🧩 Engineering Challenges Solved
+## Author
 
-This project involved solving several real-world engineering problems:
+### Anubhav Mishra
 
-## Mobile APK Crash Debugging
-
-Resolved Expo native dependency mismatches, Metro configuration issues, and release-build crashes during Android APK generation.
-
-## Monorepo Deployment Complexity
-
-Handled workspace dependency resolution across:
-
-* Vercel
-* Render
-* Expo EAS Build
-
-## GraphQL Architecture Decisions
-
-Balanced flexibility and complexity while designing scalable query patterns and resolver structures.
-
-## Realtime Synchronization
-
-Implemented websocket-based emotional analysis updates with optimized request timing.
-
-## Cross-Platform Consistency
-
-Maintained synchronized architecture across:
-
-* web frontend
-* mobile application
-* backend APIs
+- GitHub: https://github.com/anubhav-0004
+- LinkedIn: https://www.linkedin.com/in/anubhav-04-mishra/
 
 ---
 
-# 📈 Future Improvements
-
-Planned future enhancements include:
-
-* Docker containerization
-* CI/CD pipelines
-* automated testing infrastructure
-* push notification system
-* AI memory architecture
-* offline mobile synchronization
-* Redis caching layer
-* vector search integration
-* advanced observability & monitoring
-* OpenTelemetry logging
-* background queue processing
-* scalable AI inference pipelines
-
----
-
-# 🎯 Key Learning Outcomes
-
-This project demonstrates practical understanding of:
-
-* full-stack engineering
-* GraphQL architecture
-* realtime systems
-* TypeScript ecosystems
-* scalable backend design
-* mobile engineering
-* monorepo architecture
-* authentication systems
-* AI integration
-* production deployment
-* websocket communication
-* database modeling
-* system debugging
-* deployment troubleshooting
-
----
-
-# 👨‍💻 Author
-
-## Anubhav Mishra
-
-Full Stack Developer focused on:
-
-* scalable full-stack systems
-* TypeScript ecosystems
-* AI-integrated applications
-* GraphQL architecture
-* modern frontend engineering
-* realtime systems
-
-### Connect With Me
-
-#### LinkedIn
-
-https://www.linkedin.com/in/anubhav-04-mishra/
-
-#### GitHub
-
-https://github.com/anubhav-0004
-
----
-
-# ⭐ Project Philosophy
-
-EchoMind was built not only as a product, but as an exploration of modern production-grade engineering practices across:
-
-* frontend systems
-* backend architecture
-* realtime communication
-* AI integration
-* cross-platform mobile engineering
-* scalable monorepo development
-
-The goal was to simulate real-world engineering challenges while building a meaningful AI-powered platform.
-
----
-
-If you found this project interesting, consider giving the repository a ⭐ on GitHub.
-
-```
-```
+If you found this project interesting, consider giving it a ⭐ on GitHub.

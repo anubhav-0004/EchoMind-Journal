@@ -1,4 +1,5 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, useApolloClient, gql } from "@apollo/client";
+import * as Updates from "expo-updates";
 import {
   View,
   Text,
@@ -30,6 +31,7 @@ const ME_QUERY = gql`
 `;
 
 export function ProfileScreen({ navigation }: any) {
+  const client = useApolloClient();
   const { data, loading } = useQuery(ME_QUERY);
   const user = data?.me;
   const isAdmin = user?.role === "ADMIN";
@@ -42,13 +44,14 @@ export function ProfileScreen({ navigation }: any) {
         style: "destructive",
         onPress: async () => {
           await removeToken();
-          // CommonActions.reset works from any nesting level
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: "Login" }],
-            }),
-          );
+          await client.clearStore();
+          // navigation.dispatch(
+          //   CommonActions.reset({
+          //     index: 0,
+          //     routes: [{ name: "Login" }],
+          //   }),
+          // );
+          await Updates.reloadAsync();
         },
       },
     ]);

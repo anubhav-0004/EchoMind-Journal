@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   description: 'AI-powered journaling that understands your emotions',
   keywords: ['journaling', 'mental health', 'AI', 'mood tracking', 'diary'],
-  authors: [{ name: 'Anubhav Kumar' }],
+  authors: [{ name: 'Anubhav Mishra' }],
   openGraph: {
     title: 'EchoMind',
     description: 'AI-powered journaling that understands your emotions',

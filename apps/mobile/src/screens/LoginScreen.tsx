@@ -1,46 +1,57 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
-  View, Text, TextInput, TouchableOpacity,
-  StyleSheet, ScrollView, KeyboardAvoidingView,
-  Platform, ActivityIndicator, Alert,
-} from 'react-native'
-import { useMutation, gql } from '@apollo/client'
-import { setToken } from '../lib/storage'
-import { colors, spacing, radius, fontSize } from '../lib/theme'
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  ActivityIndicator,
+  Alert,
+} from "react-native";
+import { useMutation, gql } from "@apollo/client";
+import { setToken } from "../lib/storage";
+import { colors, spacing, radius, fontSize } from "../lib/theme";
 
 const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
-      user { id displayName }
+      user {
+        id
+        displayName
+      }
     }
   }
-`
+`;
 
 export function LoginScreen({ navigation }: any) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const [login, { loading }] = useMutation(LOGIN, {
     onCompleted: async (data: any) => {
-      await setToken(data.login.token)
-      navigation.replace('Main')
+      await setToken(data.login.token);
+      navigation.replace("Main");
     },
-    onError: (err: any) => Alert.alert('Login failed', err.message),
-  })
+    onError: (err: any) => Alert.alert("Login failed", err.message),
+  });
 
   const handleLogin = () => {
     if (!email || !password) {
-      Alert.alert('Error', 'Please fill in all fields')
-      return
+      Alert.alert("Error", "Please fill in all fields");
+      return;
     }
-    login({ variables: { email: email.trim(), password } })
-  }
+    login({ variables: { email: email.trim(), password } });
+  };
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView
         contentContainerStyle={styles.scroll}
@@ -75,14 +86,28 @@ export function LoginScreen({ navigation }: any) {
 
           <View style={styles.field}>
             <Text style={styles.label}>Password</Text>
-            <TextInput
-              style={styles.input}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="••••••••"
-              placeholderTextColor={colors.textMuted}
-              secureTextEntry
-            />
+
+            <View style={styles.passwordWrapper}>
+              <TextInput
+                key={showPassword ? "visible" : "hidden"}
+                style={[styles.input, { flex: 1, borderWidth: 0 }]}
+                value={password}
+                onChangeText={setPassword}
+                placeholder="••••••••"
+                placeholderTextColor={colors.textMuted}
+                secureTextEntry={!showPassword}
+                autoCorrect={false}
+                autoCapitalize="none"
+              />
+
+              <TouchableOpacity
+                onPress={() => setShowPassword((prev) => !prev)}
+              >
+                <Text style={styles.toggleText}>
+                  {showPassword ? "Hide" : "Show"}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <TouchableOpacity
@@ -91,25 +116,26 @@ export function LoginScreen({ navigation }: any) {
             disabled={loading}
             activeOpacity={0.8}
           >
-            {loading
-              ? <ActivityIndicator color={colors.white} />
-              : <Text style={styles.btnText}>Sign in</Text>
-            }
+            {loading ? (
+              <ActivityIndicator color={colors.white} />
+            ) : (
+              <Text style={styles.btnText}>Sign in</Text>
+            )}
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.link}
-            onPress={() => navigation.navigate('Signup')}
+            onPress={() => navigation.navigate("Signup")}
           >
             <Text style={styles.linkText}>
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <Text style={styles.linkHighlight}>Sign up</Text>
             </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -120,10 +146,10 @@ const styles = StyleSheet.create({
   scroll: {
     flexGrow: 1,
     padding: spacing.lg,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   logoArea: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: spacing.xl,
   },
   logoIcon: {
@@ -131,8 +157,8 @@ const styles = StyleSheet.create({
     height: 52,
     borderRadius: 14,
     backgroundColor: colors.sage,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: spacing.sm,
   },
   logoSymbol: {
@@ -141,7 +167,7 @@ const styles = StyleSheet.create({
   },
   logoText: {
     fontSize: fontSize.xxl,
-    fontWeight: '300',
+    fontWeight: "300",
     color: colors.textPrimary,
     letterSpacing: -0.5,
   },
@@ -159,7 +185,7 @@ const styles = StyleSheet.create({
   },
   formTitle: {
     fontSize: fontSize.xl,
-    fontWeight: '400',
+    fontWeight: "400",
     color: colors.textPrimary,
     marginBottom: spacing.lg,
   },
@@ -168,10 +194,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: fontSize.xs,
-    fontWeight: '500',
+    fontWeight: "500",
     color: colors.textSecondary,
     marginBottom: 6,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     letterSpacing: 0.5,
   },
   input: {
@@ -184,11 +210,29 @@ const styles = StyleSheet.create({
     fontSize: fontSize.md,
     color: colors.textPrimary,
   },
+  passwordWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.bgInput,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    borderColor: colors.border,
+    paddingRight: spacing.md,
+  },
+  toggleText: {
+    color: colors.sageLight,
+    fontSize: fontSize.sm,
+    fontWeight: "500",
+    backgroundColor: "rgba(156, 163, 175, 0.2)",
+    paddingHorizontal: 8,
+    paddingVertical: 5,
+    borderRadius: radius.md,
+  },
   btn: {
     backgroundColor: colors.sage,
     borderRadius: radius.sm,
     padding: 14,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: spacing.sm,
   },
   btnDisabled: {
@@ -197,11 +241,11 @@ const styles = StyleSheet.create({
   btnText: {
     color: colors.white,
     fontSize: fontSize.md,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   link: {
     marginTop: spacing.md,
-    alignItems: 'center',
+    alignItems: "center",
   },
   linkText: {
     fontSize: fontSize.sm,
@@ -209,6 +253,6 @@ const styles = StyleSheet.create({
   },
   linkHighlight: {
     color: colors.sageLight,
-    fontWeight: '500',
+    fontWeight: "500",
   },
-})
+});
