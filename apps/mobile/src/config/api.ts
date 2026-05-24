@@ -1,5 +1,3 @@
-export const API_URL =
-  process.env.EXPO_PUBLIC_API_URL!;
+export const API_URL ='https://echomind-server.onrender.com/graphql';
 
-export const SOCKET_URL =
-  process.env.EXPO_PUBLIC_SOCKET_URL!;
+export const SOCKET_URL ='https://echomind-server.onrender.com';

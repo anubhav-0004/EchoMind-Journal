@@ -12,6 +12,10 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://echomind-server.onrender.com/graphql",
+        "EXPO_PUBLIC_SOCKET_URL": "https://echomind-server.onrender.com"
       }
     },
     "production": {
