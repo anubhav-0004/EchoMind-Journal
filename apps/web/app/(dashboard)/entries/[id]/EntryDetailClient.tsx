@@ -146,6 +146,7 @@ export default function EntryDetailClient() {
           alignItems: "center",
           justifyContent: "space-between",
         }}
+        className="max-sm:px-1.5! max-sm:py-3! max-sm:gap-2! max-sm:place-items-center!"
       >
         <button
           onClick={() => router.push("/entries")}
@@ -161,10 +162,11 @@ export default function EntryDetailClient() {
             alignItems: "center",
             gap: "6px",
           }}
+          className="max-sm:px-3.5! max-sm:py-2! max-sm:text-xs! max-sm:text-nowrap! max-sm:hidden!"
         >
           ← Back
         </button>
-        <div style={{ fontSize: "14px", color: "#2a4b69", fontWeight: "500" }}>
+        <div style={{ fontSize: "14px", color: "#2a4b69", fontWeight: "500" }} className="max-sm:text-xs!">
           {writtenDate}
         </div>
         <button
@@ -191,6 +193,7 @@ export default function EntryDetailClient() {
             marginRight: "16px",
             marginLeft: "auto",
           }}
+          className="max-sm:px-3.5! max-sm:py-2! max-sm:mr-2.5! max-sm:border-2!"
         >
           {deleting ? "Deleting..." : "Delete"}
         </button>
@@ -216,6 +219,7 @@ export default function EntryDetailClient() {
           display: "grid",
           gridTemplateColumns: "1fr 450px",
         }}
+        className="max-sm:grid-cols-1!"
       >
         <div
           style={{
@@ -224,6 +228,7 @@ export default function EntryDetailClient() {
             borderRight: "1px solid rgba(44,58,68,0.28)",
             backgroundColor: "rgba(255,255,255,0.15)",
           }}
+          className="max-sm:px-1! max-sm:py-2! max-sm:h-72!"
         >
           <h1
             style={{
@@ -239,6 +244,7 @@ export default function EntryDetailClient() {
               borderRadius: "12px",
               border: "1px solid rgba(44,58,68,0.1)",
             }}
+            className="max-sm:text-2xl! max-sm:px-3! max-sm:py-2! max-sm:mb-1.5!"
           >
             {entry.title}
           </h1>
@@ -255,6 +261,7 @@ export default function EntryDetailClient() {
               padding: "10px 20px",
               width: "fit-content",
             }}
+            className="max-sm:px-3! max-sm:py-2! max-sm:gap-1! max-sm:mb-2! max-sm:ml-auto! max-sm:border-red-200! max-sm:bg-red-50!"
           >
             <span style={{ fontSize: "11px", color: "#30495e" }}>
               {entry.wordCount} words
@@ -290,6 +297,7 @@ export default function EntryDetailClient() {
               border: "1px solid rgba(44,58,68,0.08)",
               minHeight: "200px",
             }}
+            className="max-sm:px-3! max-sm:py-2! max-sm:text-sm! max-sm:line-height-1.4! max-sm:leading-4.5!"
           >
             {entry.body}
           </p>
@@ -301,6 +309,7 @@ export default function EntryDetailClient() {
             padding: "20px 16px",
             background: "rgba(255,255,255,0.2)",
           }}
+          className="max-sm:px-1! max-sm:py-2! max-sm:border-t-2! max-sm:border-gray-400!"
         >
           {!entry.moodAnalysis ? (
             <div

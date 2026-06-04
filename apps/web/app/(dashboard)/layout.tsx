@@ -58,14 +58,13 @@ export default function DashboardLayout({
       // className="animated-bg"
       style={{
         display: "grid",
-        gridTemplateColumns: "220px 1fr",
         minHeight: "100vh",
         fontFamily: "system-ui, sans-serif",
-        // backgroundImage: "radial-gradient(circle at 0 0, #1e2a35, #1b252e)",
         backgroundImage: "url('/bg3.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "top",
       }}
+      className="grid-cols-[220px_1fr] max-sm:grid-cols-[65px_1fr] max-sm:h-[95vh]"
     >
       <aside
         style={{
@@ -74,12 +73,14 @@ export default function DashboardLayout({
           flexDirection: "column",
           padding: 0,
         }}
+        className="max-sm:w-16!"
       >
         <div
           style={{
             padding: "20px",
             borderBottom: "1px solid rgba(255,255,255,0.06)",
           }}
+          className="max-sm:justify-center max-sm:p-3!"
         >
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <div
@@ -93,18 +94,23 @@ export default function DashboardLayout({
                 justifyContent: "center",
                 fontSize: "14px",
               }}
+              className="max-sm:w-12! max-sm:h-12! max-sm:text-2xl!"
             >
               ✦
             </div>
             <span
               style={{ fontSize: "18px", fontWeight: "400", color: "#fff" }}
+              className="max-sm:hidden"
             >
               EchoMind
             </span>
           </div>
         </div>
 
-        <nav style={{ padding: "12px 10px", flex: 1 }}>
+        <nav
+          style={{ padding: "12px 10px", flex: 1 }}
+          className="max-sm:px-2! max-sm:py-4!"
+        >
           <div
             style={{
               fontSize: "12px",
@@ -115,6 +121,7 @@ export default function DashboardLayout({
               padding: "8px 10px 6px",
               marginBottom: "10px",
             }}
+            className="max-sm:hidden!"
           >
             Journal
           </div>
@@ -146,9 +153,10 @@ export default function DashboardLayout({
                     cursor: "pointer",
                     transition: "all 0.15s",
                   }}
+                  className="max-sm:justify-center max-sm:px-0"
                 >
-                  <span>{item.icon}</span>
-                  {item.label}
+                  <span className="max-sm:scale-125">{item.icon}</span>
+                  <span className="max-sm:hidden">{item.label}</span>
                 </div>
               </Link>
             );
@@ -206,6 +214,7 @@ export default function DashboardLayout({
             padding: "14px 16px",
             borderTop: "1px solid rgba(255,255,255,0.06)",
           }}
+          className="max-sm:px-3! max-sm:py-2! max-sm:-mt-1.5! max-sm:mb-3!"
         >
           <button
             onClick={handleLogout}
@@ -220,7 +229,8 @@ export default function DashboardLayout({
               cursor: "pointer",
             }}
           >
-            Sign out
+            <span className="sm:hidden">🔒</span>
+            <span className="max-sm:hidden">Sign out</span>
           </button>
         </div>
       </aside>

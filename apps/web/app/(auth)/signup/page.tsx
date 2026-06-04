@@ -64,6 +64,7 @@ export default function SignupPage() {
         justifyContent: "center",
         fontFamily: "system-ui, sans-serif",
       }}
+      className="max-sm:px-4!"
     >
       <div
         style={{
@@ -75,6 +76,7 @@ export default function SignupPage() {
           maxWidth: "400px",
           boxShadow: "0 2px 40px rgba(26,37,48,0.06)",
         }}
+        className="max-sm:px-6! max-sm:py-8!"
       >
         <div style={{ marginBottom: "32px", textAlign: "center" }}>
           <div

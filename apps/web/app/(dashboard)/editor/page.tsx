@@ -171,6 +171,7 @@ export default function EditorPage() {
         gridTemplateColumns: "1fr 280px",
         height: "100vh",
       }}
+      className="max-sm:grid-cols-1!"
     >
       <div
         style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}
@@ -187,6 +188,7 @@ export default function EditorPage() {
             alignItems: "center",
             justifyContent: "space-between",
           }}
+          className="max-sm:px-2! max-sm:py-2!"
         >
           <div>
             <h2
@@ -259,6 +261,7 @@ export default function EditorPage() {
             padding: "24px",
             // background: "linear-gradient(160deg, #ffffff 0%, #f0f7f5 100%)",
           }}
+          className="max-sm:p-1.5!"
         >
           <input
             value={title}
@@ -279,6 +282,7 @@ export default function EditorPage() {
               marginBottom: "16px",
               fontFamily: "Georgia, serif",
             }}
+            className="max-sm:text-lg! max-sm:mb-2!"
           />
 
           <textarea

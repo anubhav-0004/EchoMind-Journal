@@ -83,6 +83,7 @@ export default function EntriesPage() {
           alignItems: "center",
           justifyContent: "space-between",
         }}
+        className="max-sm:px-2! max-sm:py-2!"
       >
         <div>
           <h2
@@ -123,6 +124,7 @@ export default function EntriesPage() {
           padding: "20px 24px",
           backgroundColor: "rgba(255, 255, 255, 0.1)",
         }}
+        className="max-sm:px-2! max-sm:py-2!"
       >
         {entries.length === 0 ? (
           <div
@@ -160,7 +162,7 @@ export default function EntriesPage() {
             </button>
           </div>
         ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }} className="max-sm:gap-1!">
             {entries.map((entry: any) => {
               const mood = entry.moodAnalysis?.primaryMood || "neutral";
               const moodColor = MOOD_COLORS[mood] || "#8a9aa8";
@@ -189,6 +191,7 @@ export default function EntriesPage() {
                   onMouseLeave={(e) =>
                     (e.currentTarget.style.boxShadow = "none")
                   }
+                  className="max-sm:gap-2! max-sm:px-2! max-sm:py-3! max-sm:bg-rose-50! max-sm:border-emerald-200!"
                 >
                   {/* Mood icon */}
                   <div
@@ -196,13 +199,14 @@ export default function EntriesPage() {
                       width: "38px",
                       height: "38px",
                       borderRadius: "10px",
-                      background: `${moodColor}15`,
+                      background: `${moodColor}35`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       fontSize: "18px",
                       flexShrink: 0,
                     }}
+                    className="max-sm:w-8! max-sm:h-8! max-sm:text-lg!"
                   >
                     {moodEmoji}
                   </div>

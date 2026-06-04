@@ -99,6 +99,7 @@ export default function ReportClient() {
           alignItems: "center",
           justifyContent: "space-between",
         }}
+        className="max-sm:px-2! max-sm:py-2!"
       >
         <div>
           <h2
@@ -108,10 +109,13 @@ export default function ReportClient() {
               fontWeight: "400",
               color: "#1a2530",
             }}
+            className="max-sm:text-base! max-sm:text-nowrap!"
           >
             Weekly Reports
           </h2>
-          <p style={{ margin: "2px 0 0", fontSize: "12px", color: "#fccad5" }}>
+          <p style={{ margin: "2px 0 0", fontSize: "12px", color: "#fccad5" }}
+            className="max-sm:text-[10px]! max-sm:hidden"
+          >
             Your AI-generated Mental Map
           </p>
         </div>
@@ -129,6 +133,7 @@ export default function ReportClient() {
             fontWeight: "500",
             cursor: generating ? "not-allowed" : "pointer",
           }}
+          className="max-sm:px-2! max-sm:py-1! max-sm:text-xs! max-sm:w-24!"
         >
           {generating ? "Generating..." : "✦ Generate This Week"}
         </button>
@@ -141,6 +146,7 @@ export default function ReportClient() {
           flexDirection: "column",
           gap: "16px",
         }}
+        className="max-sm:px-1.5! max-sm:py-1!"
       >
         {reports.length === 0 ? (
           <div
@@ -158,6 +164,7 @@ export default function ReportClient() {
               minHeight: "400px",
               justifyContent: "center",
             }}
+            className="max-sm:px-2! max-sm:py-2!"
           >
             <div style={{ fontSize: "36px", marginBottom: "12px" }}>📄</div>
             <p>No weekly reports yet.</p>
@@ -190,6 +197,7 @@ export default function ReportClient() {
                     alignItems: "center",
                     justifyContent: "space-between",
                   }}
+                  className="max-sm:px-2! max-sm:py-2! max-sm:flex-col! max-sm:items-center! max-sm:gap-4!"
                 >
                   <div>
                     <div
@@ -198,6 +206,7 @@ export default function ReportClient() {
                         fontWeight: "500",
                         color: "#1a2530",
                       }}
+                      className="max-sm:text-sm! max-sm:text-center!"
                     >
                       Week of{" "}
                       {startDate.toLocaleDateString("en-IN", {
@@ -217,6 +226,7 @@ export default function ReportClient() {
                         color: "#416687",
                         marginTop: "2px",
                       }}
+                      className="max-sm:text-xs! max-sm:text-center!"
                     >
                       Generated{" "}
                       {new Date(report.generatedAt).toLocaleDateString(
@@ -232,6 +242,7 @@ export default function ReportClient() {
                       alignItems: "center",
                       gap: "20px",
                     }}
+                    className="max-sm:gap-5! max-sm:-mt-2!"
                   >
                     <div style={{ textAlign: "center" }}>
                       <div
@@ -240,6 +251,7 @@ export default function ReportClient() {
                           fontWeight: "400",
                           color: "#4a7c6f",
                         }}
+                        className="max-sm:text-sm!"
                       >
                         {report.avgMoodScore.toFixed(1)}
                       </div>
@@ -261,6 +273,7 @@ export default function ReportClient() {
                           fontWeight: "400",
                           color: "#c4736a",
                         }}
+                        className="max-sm:text-sm!"
                       >
                         {report.avgStressLevel.toFixed(1)}
                       </div>
@@ -291,6 +304,7 @@ export default function ReportClient() {
                         gap: "5px",
                         whiteSpace: "nowrap",
                       }}
+                      className="max-sm:px-2! max-sm:py-2! max-sm:text-xs! max-sm:flex! max-sm:items-center!"
                     >
                       ↓ Download PDF
                     </button>
@@ -304,6 +318,7 @@ export default function ReportClient() {
                     flexDirection: "column",
                     gap: "14px",
                   }}
+                  className="max-sm:px-2! max-sm:py-2!"
                 >
                   {arc && arc.length > 0 && (
                     <div>
@@ -316,6 +331,7 @@ export default function ReportClient() {
                           marginBottom: "10px",
                           fontWeight: "500",
                         }}
+                        className="max-sm:text-xs!"
                       >
                         Mood Arc
                       </div>
@@ -373,11 +389,13 @@ export default function ReportClient() {
                         marginBottom: "8px",
                         fontWeight: "500",
                       }}
+                      className="max-sm:text-xs!"
                     >
                       Dominant Moods
                     </div>
                     <div
                       style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}
+                      className="max-sm:gap-1!"
                     >
                       {report.dominantMoods.map((mood: string) => (
                         <span
@@ -391,6 +409,7 @@ export default function ReportClient() {
                             fontSize: "12px",
                             textTransform: "capitalize",
                           }}
+                          className="max-sm:text-[10px]!"
                         >
                           {mood}
                         </span>
@@ -424,6 +443,7 @@ export default function ReportClient() {
                             color: "#4a5c68",
                             fontSize: "12px",
                           }}
+                          className="max-sm:text-[10px]!"
                         >
                           {theme}
                         </span>
@@ -457,6 +477,7 @@ export default function ReportClient() {
                         margin: 0,
                         fontStyle: "italic",
                       }}
+                      className="max-sm:text-xs!"
                     >
                       {report.aiSummary}
                     </p>

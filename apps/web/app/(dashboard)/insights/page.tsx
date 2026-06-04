@@ -51,7 +51,6 @@ export default function InsightsPage() {
     .slice(0, 14)
     .reverse();
 
-  // Build chart data
   const chartData = entries.map((e: any) => ({
     date: new Date(e.writtenAt).toLocaleDateString("en-IN", {
       day: "numeric",
@@ -61,7 +60,6 @@ export default function InsightsPage() {
     stress: e.moodAnalysis.stressLevel,
   }));
 
-  // Mood distribution
   const moodCounts: Record<string, number> = {};
   entries.forEach((e: any) => {
     const m = e.moodAnalysis.primaryMood;
@@ -72,7 +70,6 @@ export default function InsightsPage() {
     count,
   }));
 
-  // Averages
   const avgMood = entries.length
     ? (
         entries.reduce((s: number, e: any) => s + e.moodAnalysis.moodScore, 0) /
@@ -88,7 +85,6 @@ export default function InsightsPage() {
       ).toFixed(1)
     : "—";
 
-  // All keywords
   const allKeywords: Record<string, number> = {};
   entries.forEach((e: any) => {
     e.moodAnalysis.keywords?.forEach((k: string) => {
@@ -121,6 +117,7 @@ export default function InsightsPage() {
           backgroundImage: "linear-gradient(160deg, #a87976 0%, #e3c3c1 100%)",
           backdropFilter: "blur(10px)",
         }}
+        className="max-sm:px-2! max-sm:py-3! max-sm:gap-1!"
       >
         <h2
           style={{
@@ -144,6 +141,7 @@ export default function InsightsPage() {
           flexDirection: "column",
           gap: "16px",
         }}
+        className="max-sm:px-2! max-sm:py-3! max-sm:gap-1! max-sm:flex-col!"
       >
         <div
           style={{
@@ -151,8 +149,9 @@ export default function InsightsPage() {
             gridTemplateColumns: "1fr 1fr 1fr",
             gap: "12px",
           }}
+          className="max-sm:grid-cols-2!"
         >
-          <div style={statCardStyle}>
+          <div style={statCardStyle} className="max-sm:min-h-20!">
             <div
               style={{
                 fontSize: "14px",
@@ -161,6 +160,7 @@ export default function InsightsPage() {
                 color: "#4d708f",
                 marginBottom: "4px",
               }}
+              className="max-sm:text-xs! max-sm:text-nowrap!"
             >
               Avg Mood
             </div>
@@ -175,7 +175,7 @@ export default function InsightsPage() {
               out of 10
             </div>
           </div>
-          <div style={statCardStyle}>
+          <div style={statCardStyle} className="max-sm:min-h-20!">
             <div
               style={{
                 fontSize: "14px",
@@ -184,6 +184,7 @@ export default function InsightsPage() {
                 color: "#4d708f",
                 marginBottom: "4px",
               }}
+              className="max-sm:text-xs! max-sm:text-nowrap!"
             >
               Avg Stress
             </div>
@@ -198,7 +199,7 @@ export default function InsightsPage() {
               out of 10
             </div>
           </div>
-          <div style={statCardStyle}>
+          <div style={statCardStyle}  className="max-sm:col-span-2! max-sm:order-3! max-sm:min-h-25!">
             <div
               style={{
                 fontSize: "14px",
@@ -224,7 +225,7 @@ export default function InsightsPage() {
         </div>
 
         {chartData.length > 0 && (
-          <div style={statCardStyle}>
+          <div style={statCardStyle} className="max-sm:px-1! max-sm:py-2!">
             <div
               style={{
                 fontSize: "13px",
@@ -238,6 +239,7 @@ export default function InsightsPage() {
                 background: "rgba(255,255,255,0.25)",
                 borderRadius: "8px",
               }}
+              className="max-sm:px-2! max-sm:gap-1! max-sm:flex-col! max-sm:text-center! max-sm:mb-2!"
             >
               <div>Mood & Stress Over Time</div>
               <div
@@ -248,6 +250,7 @@ export default function InsightsPage() {
                   color: "#416687",
                   marginTop: "4px",
                 }}
+                className="max-sm:text-center! max-sm:justify-center!"
               >
                 <span
                   style={{ display: "flex", alignItems: "center", gap: "4px" }}
@@ -287,14 +290,15 @@ export default function InsightsPage() {
                 padding: "12px 0",
                 borderRadius: "8px",
               }}
+              className="max-sm:h-50! max-sm:px-1! max-sm:overflow-x-scroll! max-sm:w-full!"
             >
-              <LineChart data={chartData}>
+              <LineChart data={chartData} className="max-sm:p-0! max-sm:mx-0!">
                 <XAxis
                   dataKey="date"
                   tick={{ fontSize: 10, fill: "#374c70" }}
                   axisLine={true}
                   tickLine={true}
-                />
+                  />
                 <YAxis
                   domain={[0, 10]}
                   tick={{ fontSize: 10, fill: "#374c70" }}
@@ -339,6 +343,7 @@ export default function InsightsPage() {
                 color: "#1a2530",
                 marginBottom: "16px",
               }}
+              className="max-sm:px-2! max-sm:gap-2! max-sm:flex-col! max-sm:text-center! max-sm:mb-4!"
             >
               Mood Distribution
             </div>
@@ -379,7 +384,7 @@ export default function InsightsPage() {
         )}
 
         {topKeywords.length > 0 && (
-          <div style={statCardStyle}>
+          <div style={statCardStyle} className="max-sm:px-1! max-sm:py-2!">
             <div
               style={{
                 fontSize: "14px",
@@ -387,10 +392,11 @@ export default function InsightsPage() {
                 color: "#1a2530",
                 marginBottom: "12px",
               }}
+              className="max-sm:px-2! max-sm:gap-2! max-sm:flex-col! max-sm:text-center! max-sm:mb-4!"
             >
               Recurring Themes
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }} className="max-sm:justify-center-safe!">
               {topKeywords.map(([keyword, count]) => (
                 <span
                   key={keyword}
@@ -402,6 +408,7 @@ export default function InsightsPage() {
                     color: "#4a7c6f",
                     fontSize: "12px",
                   }}
+                  className="max-sm:px-2! max-sm:py-1! max-sm:text-xs!"
                 >
                   {keyword}
                   {count > 1 && (
