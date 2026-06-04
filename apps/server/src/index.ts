@@ -29,7 +29,7 @@ async function main() {
 
   app.use(
     cors({
-      origin: process.env.WEB_URL || "http://localhost:3000",
+      origin: [process.env.WEB_URL, "http://localhost:3000"],
       credentials: true,
     }),
   );
